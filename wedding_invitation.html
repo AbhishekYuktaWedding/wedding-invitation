@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yukta & Abhishek - Wedding Invitation</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Cinzel, Great Vibes, Inter, Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Regale Theme Colors */
+            --bg-deep-maroon: #3b060d;
+            --bg-velvet: #4A0E17;
+            --primary-gold: #D4AF37;
+            --light-gold: #F3E5AB;
+            --card-ivory: #FFFDF9;
+            --text-dark: #1E1E24;
+            --text-muted: #555555;
+            --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-deep-maroon), var(--bg-velvet));
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+            color: var(--light-gold);
+            overflow-x: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, .heading-serif { font-family: 'Cinzel', serif; }
+        .text-garamond { font-family: 'Playfair Display', serif; }
+
+        /* Full-Screen Royal Welcome Overlay (Splash Screen) */
+        #welcomeOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, var(--bg-velvet), var(--bg-deep-maroon));
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
+        }
+
+        #welcomeOverlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-card {
+            background: rgba(255, 253, 249, 0.06);
+            border: 1px solid var(--primary-gold);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: zoomIn 0.7s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .welcome-btn {
+            background: var(--gold-gradient);
+            color: var(--bg-deep-maroon);
+            border: none;
+            padding: 14px 34px;
+            font-size: 1.1rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            border-radius: 30px;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .welcome-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.7);
+        }
+
+        /* Ambient Canvas */
+        #petalCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .relative-z { position: relative; z-index: 10; }
+
+        .header-section {
+            text-align: center;
+            padding: 3rem 1rem 1rem 1rem;
+        }
+        .ganesh-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        .ganesh-img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-gold);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212,175,55,0.3);
+            animation: pulse-glow 3s infinite alternate;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+            100% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.8); }
+        }
+        .invocation-text {
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 600;
+        }
+        .invocation-sub {
+            font-size: 1.2rem;
+            color: var(--light-gold);
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 1rem 1rem 3rem 1rem;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 1rem 0;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            line-height: 1.4;
+            padding-bottom: 0.5rem;
+            overflow: visible;
+        }
+        .hero-title small {
+            display: block;
+            font-size: 2.2rem;
+            font-family: 'Great Vibes', cursive; 
+            margin: 0.2rem 0;
+            color: var(--primary-gold);
+            -webkit-text-fill-color: var(--primary-gold);
+            line-height: 1;
+        }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-title small { font-size: 1.8rem; }
+            .ganesh-img { width: 110px; height: 110px; }
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .count-box {
+            background: var(--card-ivory);
+            border: 2px solid var(--primary-gold);
+            border-radius: 12px;
+            padding: 12px 10px;
+            min-width: 75px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .count-num {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--bg-velvet);
+            line-height: 1;
+        }
+        .count-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .schedule-section { padding: 1rem 0; }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+        
+        /* Grid Filter Buttons */
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+            padding: 0 15px;
+            position: relative;
+            z-index: 20;
+        }
+        @media (min-width: 768px) {
+            .filter-grid { grid-template-columns: repeat(4, 1fr); max-width: 800px; }
+        }
+        
+        .filter-btn {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--primary-gold);
+            color: var(--light-gold);
+            padding: 12px 8px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .filter-btn small {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            display: block;
+            margin-top: 3px;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-gold);
+            color: var(--bg-deep-maroon);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            font-weight: 700;
+        }
+        .filter-btn.active small { opacity: 1; color: var(--bg-deep-maroon); font-weight: 600; }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(to bottom, transparent, var(--primary-gold), transparent);
+            top: 0; bottom: 0; left: 30px;
+            border-radius: 3px;
+        }
+
+        .date-separator {
+            position: relative;
+            z-index: 2;
+            margin: 1.5rem 0 2rem 0;
+            text-align: left;
+            padding-left: 50px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .date-badge {
+            background: var(--bg-velvet);
+            border: 1px solid var(--primary-gold);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: inline-block;
+        }
+        @media (max-width: 768px) {
+            .date-badge { font-size: 1rem; padding: 6px 15px; }
+            .timeline::before { left: 25px; }
+            .date-separator { padding-left: 45px; }
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 2rem;
+            z-index: 2;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+        @media (max-width: 768px) {
+            .timeline-item { padding-left: 50px; }
+            .timeline-item::before { left: 18px !important; }
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: var(--primary-gold);
+            border: 3px solid var(--bg-deep-maroon);
+            border-radius: 50%;
+            left: 23px;
+            top: 25px;
+            z-index: 3;
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+
+        .event-card {
+            background: var(--card-ivory);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-left: 5px solid var(--bg-velvet);
+            color: var(--text-dark);
+        }
+        .event-title {
+            font-size: 1.6rem;
+            color: var(--bg-velvet);
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .event-time {
+            font-family: 'Inter', sans-serif;
+            color: #8B6508; 
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .dress-code {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #F4F1EA;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid #D1C7B1;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .color-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .venue-text {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .btn-action-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .btn-custom {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            position: relative;
+            z-index: 30;
+        }
+        .btn-map { background-color: var(--bg-velvet); color: var(--card-ivory); }
+        .btn-map:hover { background-color: var(--bg-deep-maroon); color: var(--card-ivory); }
+        .btn-cal { background-color: white; color: var(--bg-velvet); border-color: var(--bg-velvet); }
+        .btn-cal:hover { background-color: #F4F1EA; color: var(--bg-velvet); }
+
+        .footer-section {
+            text-align: center;
+            padding: 1rem 1rem 5rem 1rem;
+            background: linear-gradient(to top, var(--bg-deep-maroon), transparent);
+            position: relative;
+            z-index: 10;
+        }
+        .footer-divider {
+            width: 150px;
+            margin: 0 auto 2rem auto;
+            opacity: 0.8;
+        }
+        .footer-msg {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--primary-gold);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .footer-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--light-gold);
+            margin-bottom: 2.5rem;
+        }
+        .btn-blessings {
+            background: var(--gold-gradient);
+            color: var(--bg-deep-maroon);
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 30;
+        }
+        .btn-blessings:hover { transform: scale(1.05); }
+
+        /* Floating Music Toggle Button */
+        #musicToggleBtn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 0 0 10px rgba(212, 175, 55, 0.6);
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.2s ease;
+            border: 2px solid var(--light-gold);
+        }
+        #musicToggleBtn:hover {
+            transform: scale(1.1);
+        }
+        #musicIcon {
+            color: var(--bg-deep-maroon);
+            font-size: 1.6rem;
+        }
+        .music-playing {
+            animation: spinMusic 4s linear infinite;
+        }
+        @keyframes spinMusic {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Royal Welcome / Invitation Splash Screen -->
+    <div id="welcomeOverlay">
+        <div class="welcome-card">
+            <div class="ganesh-wrapper" style="margin-bottom: 0.8rem;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlLkyndeF0sCD0GQwuiEvZTDReTAPxkvv9y0YUBHf0g&s=10" alt="Ganesh Ji" class="ganesh-img" style="width: 85px; height: 85px;">
+            </div>
+            <div class="invocation-text heading-serif" style="font-size: 1.15rem; margin-bottom: 0.5rem;">|| Shree Ganeshay Namah ||</div>
+            
+            <div class="hero-title" style="font-size: 2.2rem; margin: 0.6rem 0; line-height: 1.3;">
+                <span>Yukta Agrawal</span>
+                <small style="font-size: 1.5rem; margin: 0;">&amp;</small>
+                <span>Abhishek Goyal</span>
+            </div>
+            
+            <p style="color: var(--light-gold); font-size: 0.95rem; margin: 0.8rem 0 0.5rem 0; letter-spacing: 0.5px; opacity: 0.9;">
+                Request the pleasure of your company as they celebrate their union.
+            </p>
+
+            <button class="welcome-btn" onclick="enterWebsite()">
+                <span class="material-icons-round" style="font-size: 1.3rem;">mail</span> Open Invitation
+            </button>
+        </div>
+    </div>
+
+    <!-- Background Music Element -->
+    <audio id="weddingMusic" loop preload="auto">
+        <source src="background_music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <div id="musicToggleBtn" onclick="toggleMusic(event)" title="Toggle Music">
+        <span class="material-icons-round" id="musicIcon">music_note</span>
+    </div>
+
+    <!-- Background Canvas for Petal Animations -->
+    <canvas id="petalCanvas"></canvas>
+
+    <div class="container relative-z" id="mainContent">
+        
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="ganesh-wrapper">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlLkyndeF0sCD0GQwuiEvZTDReTAPxkvv9y0YUBHf0g&s=10" alt="Ganesh Ji" class="ganesh-img">
+            </div>
+            <div class="invocation-text heading-serif">|| Shree Ganeshay Namah ||</div>
+            <div class="invocation-sub text-garamond">✦<br>A celebration of love, family &amp; forever<br>✦</div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title couple-names">
+                <span>Yukta Agrawal</span>
+                <small class="heading-serif">&amp;</small>
+                <span>Abhishek Goyal</span>
+            </h1>
+            
+            <!-- Live Countdown -->
+            <div class="countdown-wrapper" id="countdown">
+                <div class="count-box"><div class="count-num" id="days">00</div><div class="count-label">Days</div></div>
+                <div class="count-box"><div class="count-num" id="hours">00</div><div class="count-label">Hours</div></div>
+                <div class="count-box"><div class="count-num" id="minutes">00</div><div class="count-label">Mins</div></div>
+                <div class="count-box"><div class="count-num" id="seconds">00</div><div class="count-label">Secs</div></div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <div class="schedule-section">
+            <h2 class="section-title">Schedule</h2>
+            
+            <!-- Grid Filters (Tap outside resets to show all) -->
+            <div class="filter-grid" id="filterGrid">
+                <button class="filter-btn" data-filter="nov19">19 Nov<br><small>Bundi</small></button>
+                <button class="filter-btn" data-filter="nov22">22 Nov<br><small>Bundi</small></button>
+                <button class="filter-btn" data-filter="nov24">24 Nov<br><small>Jhalawar</small></button>
+                <button class="filter-btn" data-filter="nov25">25 Nov<br><small>Jhalawar</small></button>
+            </div>
+
+            <div class="timeline" id="timelineContainer">
+                
+                <!-- November 19 -->
+                <div class="timeline-date-group" data-date="nov19">
+                    <div class="date-separator">
+                        <div class="date-badge">Thursday, 19th Nov 2026 • Bundi</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Vinayak Sthapana</h3>
+                            <div class="event-time">
+                                <span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM Onwards
+                            </div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: linear-gradient(135deg, #FF9933, #FFD700);"></span>
+                                Dress Code: Pooja Attire
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/vPiJKSPJqJKVyrin9" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Vinayak Sthapana', '2026-11-19T11:00:00', '2026-11-19T14:00:00', 'H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan', 'Dress Code: Pooja Attire')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 22 -->
+                <div class="timeline-date-group" data-date="nov22">
+                    <div class="date-separator">
+                        <div class="date-badge">Sunday, 22nd Nov 2026 • Bundi</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Mehendi</h3>
+                            <div class="event-time">
+                                <span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 10:00 AM Onwards
+                            </div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: #2E8B57;"></span>
+                                Dress Code: Shades of Green
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/vPiJKSPJqJKVyrin9" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Mehendi', '2026-11-22T10:00:00', '2026-11-22T14:00:00', 'H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan', 'Dress Code: Shades of Green')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 24 -->
+                <div class="timeline-date-group" data-date="nov24">
+                    <div class="date-separator">
+                        <div class="date-badge">Tuesday, 24th Nov 2026 • Jhalawar</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Basan</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 10:00 AM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: #DC143C;"></span>
+                                Dress Code: Casual Red Saree
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Basan', '2026-11-24T10:00:00', '2026-11-24T11:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Casual Red Saree')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Mayra</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: linear-gradient(45deg, #FF007F, #FFA500);"></span>
+                                Dress Code: Vibrant and Bright
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Mayra', '2026-11-24T11:00:00', '2026-11-24T13:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Vibrant and Bright')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Sagai</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 1:00 PM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: var(--bg-velvet);"></span>
+                                Dress Code: Ethnic Wear
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Sagai', '2026-11-24T13:00:00', '2026-11-24T15:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Ethnic Wear')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Sangeet</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 7:00 PM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: #1A237E;"></span>
+                                Dress Code: Indo Western
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Sangeet', '2026-11-24T19:00:00', '2026-11-24T23:30:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Indo Western')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 25 -->
+                <div class="timeline-date-group" data-date="nov25">
+                    <div class="date-separator">
+                        <div class="date-badge">Wednesday, 25th Nov 2026 • Jhalawar</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Haldi</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);"></span>
+                                Dress Code: Multicolour (Rainbow)
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Haldi', '2026-11-25T11:00:00', '2026-11-25T13:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Multicolour (Rainbow)')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Reception</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 7:00 PM</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: var(--bg-velvet);"></span>
+                                Dress Code: Ethnic Wear
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Reception', '2026-11-25T18:00:00', '2026-11-25T22:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Ethnic Wear')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="event-card">
+                            <h3 class="event-title">Phere</h3>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:30 PM Onwards</div>
+                            <div class="dress-code">
+                                <span class="color-swatch" style="background: #90CAF9;"></span>
+                                Dress Code: Casual and Comfortable
+                            </div>
+                            <div class="venue-text">
+                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
+                                New Mukundra, Jhalawar, Rajasthan
+                            </div>
+                            <div class="btn-action-group">
+                                <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                </a>
+                                <button class="btn-custom btn-cal" onclick="addToCalendar('Phere', '2026-11-25T23:00:00', '2026-11-26T04:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Casual &amp; Comfortable')">
+                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <svg class="footer-divider" viewBox="0 0 100 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 L45 5 L50 0 L55 5 Z" fill="var(--primary-gold)"/>
+                <path d="M50 20 L40 10 L50 0 L60 10 Z" fill="var(--primary-gold)" opacity="0.5"/>
+                <line x1="0" y1="10" x2="35" y2="10" stroke="var(--primary-gold)" stroke-width="1"/>
+                <line x1="65" y1="10" x2="100" y2="10" stroke="var(--primary-gold)" stroke-width="1"/>
+            </svg>
+
+            <div class="footer-msg">AWAITING YOUR PRESENCE</div>
+            <div class="footer-sub">See you at the celebrations!</div>
+            
+            <button class="btn-blessings" onclick="showBlessingToast()">
+                💜 Send your blessings -&gt; 
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Tab / Grid Filtering Logic & Tap-to-Reset Behavior
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const dateGroups = document.querySelectorAll('.timeline-date-group');
+
+        function animateItems(group) {
+            const items = group.querySelectorAll('.timeline-item');
+            let delay = 0.1;
+            items.forEach(item => {
+                item.style.animation = 'none';
+                item.offsetHeight; /* trigger reflow */
+                item.style.animation = `slideUp 0.5s ease-out forwards ${delay}s`; 
+                delay += 0.1;
+            });
+        }
+
+        // Handle Filter Button Clicks
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent the document click listener from immediately resetting it
+                
+                // Remove active class from all
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                dateGroups.forEach(group => {
+                    if (group.getAttribute('data-date') === filterValue) {
+                        group.style.display = 'block';
+                        animateItems(group);
+                    } else {
+                        group.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Global Click Listener for Tap-to-Reset
+        document.addEventListener('click', (event) => {
+            // Check if the click happened inside the filter buttons, action buttons, overlay, or interactive elements
+            const isClickInsideFilter = event.target.closest('.filter-btn');
+            const isActionBtn = event.target.closest('.btn-custom');
+            const isBlessingBtn = event.target.closest('.btn-blessings');
+            const isMusicBtn = event.target.closest('#musicToggleBtn');
+            const isWelcomeOverlay = event.target.closest('#welcomeOverlay');
+            
+            // If the user tapped anywhere else on the screen (background, header, empty space)
+            if (!isClickInsideFilter && !isActionBtn && !isBlessingBtn && !isMusicBtn && !isWelcomeOverlay) {
+                let didReset = false;
+                filterBtns.forEach(btn => {
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                        didReset = true;
+                    }
+                });
+                
+                // Show all dates again
+                if (didReset) {
+                    dateGroups.forEach(group => {
+                        if (group.style.display !== 'block') {
+                            group.style.display = 'block';
+                            animateItems(group);
+                        }
+                    });
+                }
+            }
+        });
+
+        // Live Countdown Script (Targeting Nov 25, 2026, 11:30 PM IST)
+        const targetDate = new Date('2026-11-25T23:30:00+05:30').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = days.toString().padStart(2, '0');
+                document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('countdown').innerHTML = "<h3 class='heading-serif' style='color: var(--primary-gold); font-size: 1.8rem; width: 100%; text-align: center; margin-top: 10px;'>The Celebrations Have Begun!</h3>";
+            }
+        };
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Calendar Logic
+        function formatGoogleCalendarDate(localIsoString) {
+            const dateObj = new Date(localIsoString + '+05:30'); 
+            const year = dateObj.getUTCFullYear();
+            const month = String(dateObj.getUTCMonth() + 1).padStart(2, '0');
+            const day = String(dateObj.getUTCDate()).padStart(2, '0');
+            const hours = String(dateObj.getUTCHours()).padStart(2, '0');
+            const minutes = String(dateObj.getUTCMinutes()).padStart(2, '0');
+            const seconds = String(dateObj.getUTCSeconds()).padStart(2, '0');
+            return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+        }
+
+        function addToCalendar(title, startLocal, endLocal, location, details) {
+            const text = encodeURIComponent(`Yukta & Abhishek: ${title}`);
+            const startUTC = formatGoogleCalendarDate(startLocal);
+            const endUTC = formatGoogleCalendarDate(endLocal);
+            const dates = `${startUTC}/${endUTC}`;
+            const loc = encodeURIComponent(location);
+            const desc = encodeURIComponent(details + `\n\nWe look forward to celebrating with you!`);
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${dates}&details=${desc}&location=${loc}`;
+            window.open(url, '_blank');
+        }
+
+        // WhatsApp Blessings Redirection
+        function showBlessingToast() {
+            const url = `https://chat.whatsapp.com/C0tKTh5ledk8sKpbUSOCBp`;
+            window.open(url, '_blank');
+        }
+
+        // Background Music Handler with Continuous Loop Safeguard
+        const music = document.getElementById('weddingMusic');
+        const musicBtn = document.getElementById('musicToggleBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        // Guaranteed loop configuration
+        music.loop = true;
+        music.addEventListener('ended', function () {
+            this.currentTime = 0;
+            this.play().catch(err => console.log('Loop restart safeguard caught:', err));
+        }, false);
+
+        function playAudio() {
+            music.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('music-playing');
+                musicIcon.innerText = 'music_note';
+            }).catch(err => {
+                console.log("Autoplay waiting for initial user interaction:", err);
+            });
+        }
+
+        function pauseAudio() {
+            music.pause();
+            isPlaying = false;
+            musicBtn.classList.remove('music-playing');
+            musicIcon.innerText = 'music_off';
+        }
+
+        function toggleMusic(e) {
+            if (e) e.stopPropagation();
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+
+        // Entry Function: Fades the splash screen and begins audio
+        function enterWebsite() {
+            const overlay = document.getElementById('welcomeOverlay');
+            overlay.classList.add('fade-out');
+            playAudio();
+        }
+
+        // Canvas Petal Animation
+        const canvas = document.getElementById('petalCanvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+        let animationEnabled = true;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = -20;
+                this.size = Math.random() * 6 + 4;
+                this.speed = Math.random() * 1.5 + 0.5;
+                this.sway = Math.random() * 2;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.1;
+                this.color = Math.random() > 0.5 ? 'rgba(212, 175, 55, 0.6)' : 'rgba(183, 110, 121, 0.6)';
+            }
+            update() {
+                this.y += this.speed;
+                this.x += Math.sin(this.y * 0.02 + this.sway) * 1;
+                this.angle += this.spin;
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.fillStyle = this.color;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(this.size, -this.size, 0, -this.size * 2);
+                ctx.quadraticCurveTo(-this.size, -this.size, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 30; i++) {
+            petals.push(new Petal());
+        }
+
+        function animatePetals() {
+            if (!animationEnabled) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let petal of petals) {
+                petal.update();
+                petal.draw();
+            }
+            requestAnimationFrame(animatePetals);
+        }
+
+        window.onload = function() {
+            animatePetals();
+        };
+    </script>
+</body>
+</html>
