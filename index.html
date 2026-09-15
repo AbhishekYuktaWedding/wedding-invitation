@@ -30,6 +30,10 @@
             --gold-gradient: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background: linear-gradient(135deg, var(--bg-deep-maroon), var(--bg-velvet));
             background-attachment: fixed;
@@ -40,6 +44,7 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
         }
 
         /* Typography */
@@ -60,7 +65,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 20px;
+            padding: 16px;
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s ease;
         }
 
@@ -71,20 +76,20 @@
         }
 
         .welcome-card {
-            background: rgba(255, 253, 249, 0.06);
+            background: rgba(255, 253, 249, 0.07);
             border: 1px solid var(--primary-gold);
-            border-radius: 24px;
-            padding: 3rem 2rem;
+            border-radius: 20px;
+            padding: 2.2rem 1.2rem;
             max-width: 440px;
-            width: 90%;
+            width: 95%;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            animation: zoomIn 0.7s ease-out;
+            animation: zoomIn 0.6s ease-out;
         }
 
         @keyframes zoomIn {
-            from { opacity: 0; transform: scale(0.92); }
+            from { opacity: 0; transform: scale(0.94); }
             to { opacity: 1; transform: scale(1); }
         }
 
@@ -92,16 +97,16 @@
             background: var(--gold-gradient);
             color: var(--bg-deep-maroon);
             border: none;
-            padding: 14px 34px;
-            font-size: 1.1rem;
+            padding: 13px 30px;
+            font-size: 1.05rem;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             border-radius: 30px;
             box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            margin-top: 1.8rem;
+            margin-top: 1.5rem;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -127,16 +132,16 @@
 
         .header-section {
             text-align: center;
-            padding: 3rem 1rem 1rem 1rem;
+            padding: 2.5rem 1rem 1rem 1rem;
         }
         .ganesh-wrapper {
             position: relative;
             display: inline-block;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         .ganesh-img {
-            width: 130px;
-            height: 130px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             border: 1px solid var(--primary-gold);
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 0 15px rgba(212,175,55,0.3);
@@ -146,97 +151,111 @@
             0% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
             100% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.8); }
         }
+
         .invocation-text {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 4.4vw, 1.45rem);
             color: var(--primary-gold);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-bottom: 0.4rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
             font-weight: 600;
+            white-space: nowrap;
+            display: inline-block;
+            max-width: 100%;
         }
         .invocation-sub {
-            font-size: 1.2rem;
+            font-size: clamp(0.95rem, 3.8vw, 1.15rem);
             color: var(--light-gold);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-top: 0.2rem;
             opacity: 0.95;
             font-weight: 500;
+            line-height: 1.5;
         }
 
+        /* Fixed Hero Typography without desktop clipping */
         .hero-section {
             text-align: center;
-            padding: 1rem 1rem 3rem 1rem;
+            padding: 0.5rem 0.8rem 2.5rem 0.8rem;
         }
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin: 1rem 0;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+            font-size: clamp(2rem, 7.5vw, 3.5rem);
+            margin: 0.8rem 0;
             font-weight: 700;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            line-height: 1.4;
+            gap: 2px;
+            line-height: 1.35;
             padding-bottom: 0.5rem;
             overflow: visible;
         }
+        .hero-title span {
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding: 0 0.35em 0.15em 0.35em;
+            margin-left: -0.2em;
+            margin-right: -0.2em;
+            overflow: visible;
+            white-space: nowrap;
+            max-width: 100%;
+            filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.4));
+        }
         .hero-title small {
             display: block;
-            font-size: 2.2rem;
+            font-size: clamp(1.6rem, 6vw, 2.2rem);
             font-family: 'Great Vibes', cursive; 
-            margin: 0.2rem 0;
+            margin: 0.1rem 0;
             color: var(--primary-gold);
             -webkit-text-fill-color: var(--primary-gold);
             line-height: 1;
-        }
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-title small { font-size: 1.8rem; }
-            .ganesh-img { width: 110px; height: 110px; }
+            padding: 0 0.2em;
         }
 
+        /* 1-Row Responsive Countdown */
         .countdown-wrapper {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 1.5rem auto 0 auto;
+            max-width: 360px;
+            width: 100%;
+            padding: 0 5px;
         }
         .count-box {
             background: var(--card-ivory);
-            border: 2px solid var(--primary-gold);
-            border-radius: 12px;
-            padding: 12px 10px;
-            min-width: 75px;
+            border: 1.5px solid var(--primary-gold);
+            border-radius: 10px;
+            padding: 10px 4px;
             text-align: center;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            min-width: 0;
         }
         .count-num {
             font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 5vw, 1.8rem);
             font-weight: 700;
             color: var(--bg-velvet);
             line-height: 1;
         }
         .count-label {
-            font-size: 0.75rem;
+            font-size: clamp(0.65rem, 2.3vw, 0.75rem);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: var(--text-dark);
             margin-top: 5px;
             font-weight: 700;
         }
 
-        .schedule-section { padding: 1rem 0; }
+        .schedule-section { padding: 0.5rem 0; }
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(2rem, 7vw, 2.5rem);
             color: var(--primary-gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             letter-spacing: 2px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
@@ -246,33 +265,33 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
-            max-width: 600px;
-            margin: 0 auto 2.5rem auto;
-            padding: 0 15px;
+            max-width: 500px;
+            margin: 0 auto 2rem auto;
+            padding: 0 12px;
             position: relative;
             z-index: 20;
         }
         @media (min-width: 768px) {
-            .filter-grid { grid-template-columns: repeat(4, 1fr); max-width: 800px; }
+            .filter-grid { grid-template-columns: repeat(4, 1fr); max-width: 780px; }
         }
         
         .filter-btn {
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.45);
             border: 1px solid var(--primary-gold);
             color: var(--light-gold);
-            padding: 12px 8px;
-            border-radius: 12px;
+            padding: 10px 6px;
+            border-radius: 10px;
             font-family: 'Inter', sans-serif;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            font-size: clamp(0.85rem, 3.2vw, 0.95rem);
+            transition: all 0.25s ease;
             cursor: pointer;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.25;
         }
         .filter-btn small {
-            font-size: 0.75rem;
-            opacity: 0.8;
+            font-size: 0.72rem;
+            opacity: 0.85;
             display: block;
             margin-top: 3px;
         }
@@ -284,142 +303,147 @@
         }
         .filter-btn.active small { opacity: 1; color: var(--bg-deep-maroon); font-weight: 600; }
 
+        /* Timeline */
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 10px;
         }
         .timeline::before {
             content: '';
             position: absolute;
-            width: 3px;
+            width: 2px;
             background: linear-gradient(to bottom, transparent, var(--primary-gold), transparent);
-            top: 0; bottom: 0; left: 30px;
-            border-radius: 3px;
+            top: 0; bottom: 0; left: 24px;
+            border-radius: 2px;
         }
 
         .date-separator {
             position: relative;
             z-index: 2;
-            margin: 1.5rem 0 2rem 0;
+            margin: 1.5rem 0 1.5rem 0;
             text-align: left;
-            padding-left: 50px;
-            animation: fadeIn 0.5s ease-in-out;
+            padding-left: 42px;
+            animation: fadeIn 0.4s ease-in-out;
         }
         .date-badge {
             background: var(--bg-velvet);
             border: 1px solid var(--primary-gold);
-            padding: 8px 20px;
+            padding: 6px 14px;
             border-radius: 8px;
             font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.82rem, 3.2vw, 1.05rem);
             color: var(--primary-gold);
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             display: inline-block;
-        }
-        @media (max-width: 768px) {
-            .date-badge { font-size: 1rem; padding: 6px 15px; }
-            .timeline::before { left: 25px; }
-            .date-separator { padding-left: 45px; }
+            line-height: 1.3;
         }
 
         .timeline-item {
             position: relative;
-            padding-left: 60px;
-            margin-bottom: 2rem;
+            padding-left: 45px;
+            margin-bottom: 1.8rem;
             z-index: 2;
-            animation: slideUp 0.5s ease-out forwards;
-        }
-        @media (max-width: 768px) {
-            .timeline-item { padding-left: 50px; }
-            .timeline-item::before { left: 18px !important; }
+            animation: slideUp 0.4s ease-out forwards;
         }
         
         .timeline-item::before {
             content: '';
             position: absolute;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             background-color: var(--primary-gold);
-            border: 3px solid var(--bg-deep-maroon);
+            border: 2.5px solid var(--bg-deep-maroon);
             border-radius: 50%;
-            left: 23px;
-            top: 25px;
+            left: 18px;
+            top: 22px;
             z-index: 3;
-            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+            box-shadow: 0 0 8px rgba(212,175,55,0.6);
+        }
+
+        @media (max-width: 480px) {
+            .timeline::before { left: 16px; }
+            .date-separator { padding-left: 32px; }
+            .timeline-item { padding-left: 34px; }
+            .timeline-item::before { left: 10px; }
         }
 
         .event-card {
             background: var(--card-ivory);
             border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border-left: 5px solid var(--bg-velvet);
+            padding: 1.2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+            border-left: 4px solid var(--bg-velvet);
             color: var(--text-dark);
         }
         .event-title {
-            font-size: 1.6rem;
+            font-size: clamp(1.25rem, 5vw, 1.55rem);
             color: var(--bg-velvet);
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.25;
         }
         .event-time {
             font-family: 'Inter', sans-serif;
             color: #8B6508; 
-            font-size: 1.05rem;
+            font-size: clamp(0.92rem, 3.4vw, 1.05rem);
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         
         .dress-code {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             background: #F4F1EA;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            padding: 5px 10px;
+            border-radius: 16px;
+            font-size: clamp(0.8rem, 3vw, 0.88rem);
+            margin-bottom: 0.8rem;
             border: 1px solid #D1C7B1;
             color: var(--text-dark);
             font-weight: 600;
+            line-height: 1.2;
         }
         .color-swatch {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
             border-radius: 50%;
             display: inline-block;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
         .venue-text {
-            font-size: 0.95rem;
+            font-size: clamp(0.84rem, 3.1vw, 0.92rem);
             color: var(--text-muted);
-            line-height: 1.4;
-            margin-bottom: 1.2rem;
+            line-height: 1.35;
+            margin-bottom: 1.1rem;
             display: flex;
             align-items: flex-start;
-            gap: 6px;
+            gap: 5px;
             font-weight: 500;
         }
 
         .btn-action-group {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .btn-custom {
+            flex: 1 1 130px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 16px;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 12px;
             border-radius: 8px;
-            font-size: 0.9rem;
+            font-size: clamp(0.82rem, 3vw, 0.88rem);
             font-weight: 600;
             text-decoration: none;
             transition: all 0.2s ease;
@@ -427,6 +451,7 @@
             border: 1px solid transparent;
             position: relative;
             z-index: 30;
+            white-space: nowrap;
         }
         .btn-map { background-color: var(--bg-velvet); color: var(--card-ivory); }
         .btn-map:hover { background-color: var(--bg-deep-maroon); color: var(--card-ivory); }
@@ -435,37 +460,37 @@
 
         .footer-section {
             text-align: center;
-            padding: 1rem 1rem 5rem 1rem;
+            padding: 1.5rem 1rem 5rem 1rem;
             background: linear-gradient(to top, var(--bg-deep-maroon), transparent);
             position: relative;
             z-index: 10;
         }
         .footer-divider {
-            width: 150px;
-            margin: 0 auto 2rem auto;
+            width: 140px;
+            margin: 0 auto 1.5rem auto;
             opacity: 0.8;
         }
         .footer-msg {
             font-family: 'Cinzel', serif;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
+            font-size: clamp(1.2rem, 4.5vw, 1.45rem);
+            letter-spacing: 1.5px;
             color: var(--primary-gold);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             font-weight: 600;
         }
         .footer-sub {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: clamp(1.3rem, 5vw, 1.55rem);
             font-style: italic;
             color: var(--light-gold);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
         .btn-blessings {
             background: var(--gold-gradient);
             color: var(--bg-deep-maroon);
             border: none;
-            padding: 14px 32px;
-            font-size: 1.1rem;
+            padding: 12px 28px;
+            font-size: clamp(0.95rem, 3.8vw, 1.05rem);
             font-weight: 700;
             border-radius: 30px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
@@ -473,16 +498,17 @@
             cursor: pointer;
             position: relative;
             z-index: 30;
+            white-space: nowrap;
         }
-        .btn-blessings:hover { transform: scale(1.05); }
+        .btn-blessings:hover { transform: scale(1.04); }
 
         /* Floating Music Toggle Button */
         #musicToggleBtn {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 50px;
-            height: 50px;
+            bottom: 20px;
+            right: 20px;
+            width: 46px;
+            height: 46px;
             background: var(--gold-gradient);
             border-radius: 50%;
             display: flex;
@@ -499,7 +525,7 @@
         }
         #musicIcon {
             color: var(--bg-deep-maroon);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
         .music-playing {
             animation: spinMusic 4s linear infinite;
@@ -510,7 +536,7 @@
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -518,23 +544,26 @@
     <!-- Royal Welcome / Invitation Splash Screen -->
     <div id="welcomeOverlay">
         <div class="welcome-card">
-            <div class="ganesh-wrapper" style="margin-bottom: 0.8rem;">
+            <div class="ganesh-wrapper" style="margin-bottom: 0.6rem;">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlLkyndeF0sCD0GQwuiEvZTDReTAPxkvv9y0YUBHf0g&s=10" alt="Ganesh Ji" class="ganesh-img" style="width: 85px; height: 85px;">
             </div>
-            <div class="invocation-text heading-serif" style="font-size: 1.15rem; margin-bottom: 0.5rem;">|| Shree Ganeshay Namah ||</div>
             
-            <div class="hero-title" style="font-size: 2.2rem; margin: 0.6rem 0; line-height: 1.3;">
+            <div class="invocation-text heading-serif">|| Shree Ganeshay Namah ||</div>
+            
+            <div class="hero-title" style="margin: 0.6rem -1rem; line-height: 1.25;">
                 <span>Yukta Agrawal</span>
-                <small style="font-size: 1.5rem; margin: 0;">&amp;</small>
+                <small>&amp;</small>
                 <span>Abhishek Goyal</span>
             </div>
             
-            <p style="color: var(--light-gold); font-size: 0.95rem; margin: 0.8rem 0 0.5rem 0; letter-spacing: 0.5px; opacity: 0.9;">
+            <!-- Updated to first-person text -->
+            <p style="color: var(--light-gold); font-size: 0.92rem; margin: 0.8rem auto 0 auto; letter-spacing: 0.5px; opacity: 0.95; max-width: 310px; line-height: 1.45;">
                 Request the pleasure of your company as we celebrate our union.
             </p>
 
+            <!-- Updated Button Label -->
             <button class="welcome-btn" onclick="enterWebsite()">
-                <span class="material-icons-round" style="font-size: 1.3rem;">mail</span> Open Invitation
+                <span class="material-icons-round" style="font-size: 1.25rem;">celebration</span> Join The Celebrations
             </button>
         </div>
     </div>
@@ -559,7 +588,9 @@
             <div class="ganesh-wrapper">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxlLkyndeF0sCD0GQwuiEvZTDReTAPxkvv9y0YUBHf0g&s=10" alt="Ganesh Ji" class="ganesh-img">
             </div>
-            <div class="invocation-text heading-serif">|| Shree Ganeshay Namah ||</div>
+            <div>
+                <span class="invocation-text heading-serif">|| Shree Ganeshay Namah ||</span>
+            </div>
             <div class="invocation-sub text-garamond">✦<br>A celebration of love, family &amp; forever<br>✦</div>
         </div>
 
@@ -571,7 +602,7 @@
                 <span>Abhishek Goyal</span>
             </h1>
             
-            <!-- Live Countdown -->
+            <!-- Live Countdown (1-Row Guaranteed) -->
             <div class="countdown-wrapper" id="countdown">
                 <div class="count-box"><div class="count-num" id="days">00</div><div class="count-label">Days</div></div>
                 <div class="count-box"><div class="count-num" id="hours">00</div><div class="count-label">Hours</div></div>
@@ -604,22 +635,22 @@
                         <div class="event-card">
                             <h3 class="event-title">Vinayak Sthapana</h3>
                             <div class="event-time">
-                                <span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM Onwards
+                                <span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 11:00 AM Onwards
                             </div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: linear-gradient(135deg, #FF9933, #FFD700);"></span>
                                 Dress Code: Pooja Attire
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/vPiJKSPJqJKVyrin9" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Vinayak Sthapana', '2026-11-19T11:00:00', '2026-11-19T14:00:00', 'H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan', 'Dress Code: Pooja Attire')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -636,22 +667,22 @@
                         <div class="event-card">
                             <h3 class="event-title">Mehendi</h3>
                             <div class="event-time">
-                                <span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 10:00 AM Onwards
+                                <span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 10:00 AM Onwards
                             </div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: #2E8B57;"></span>
                                 Dress Code: Shades of Green
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/vPiJKSPJqJKVyrin9" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Mehendi', '2026-11-22T10:00:00', '2026-11-22T14:00:00', 'H.No.48, Rajat Colony Gate No.6, Bundi, Rajasthan', 'Dress Code: Shades of Green')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -667,21 +698,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Basan</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 10:00 AM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 10:00 AM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: #DC143C;"></span>
                                 Dress Code: Casual Red Saree
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Basan', '2026-11-24T10:00:00', '2026-11-24T11:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Casual Red Saree')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -690,21 +721,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Mayra</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 11:00 AM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: linear-gradient(45deg, #FF007F, #FFA500);"></span>
                                 Dress Code: Vibrant and Bright
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Mayra', '2026-11-24T11:00:00', '2026-11-24T13:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Vibrant and Bright')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -713,21 +744,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Sagai</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 1:00 PM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 1:00 PM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: var(--bg-velvet);"></span>
                                 Dress Code: Ethnic Wear
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Sagai', '2026-11-24T13:00:00', '2026-11-24T15:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Ethnic Wear')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -736,21 +767,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Sangeet</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 7:00 PM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 7:00 PM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: #1A237E;"></span>
                                 Dress Code: Indo Western
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Sangeet', '2026-11-24T19:00:00', '2026-11-24T23:30:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Indo Western')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -766,21 +797,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Haldi</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:00 AM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 11:00 AM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);"></span>
                                 Dress Code: Multicolour (Rainbow)
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Haldi', '2026-11-25T11:00:00', '2026-11-25T13:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Multicolour (Rainbow)')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -789,21 +820,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Reception</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 7:00 PM</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 7:00 PM</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: var(--bg-velvet);"></span>
                                 Dress Code: Ethnic Wear
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Reception', '2026-11-25T18:00:00', '2026-11-25T22:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Ethnic Wear')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -812,21 +843,21 @@
                     <div class="timeline-item">
                         <div class="event-card">
                             <h3 class="event-title">Phere</h3>
-                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.2rem;">schedule</span> 11:30 PM Onwards</div>
+                            <div class="event-time"><span class="material-icons-round" style="font-size: 1.15rem;">schedule</span> 11:30 PM Onwards</div>
                             <div class="dress-code">
                                 <span class="color-swatch" style="background: #90CAF9;"></span>
                                 Dress Code: Casual and Comfortable
                             </div>
                             <div class="venue-text">
-                                <span class="material-icons-round" style="font-size: 1.2rem; color: var(--bg-velvet);">location_on</span>
-                                New Mukundra, Jhalawar, Rajasthan
+                                <span class="material-icons-round" style="font-size: 1.15rem; color: var(--bg-velvet); flex-shrink: 0;">location_on</span>
+                                <span>New Mukundra, Jhalawar, Rajasthan</span>
                             </div>
                             <div class="btn-action-group">
                                 <a href="https://maps.app.goo.gl/weGhxoH3EuMBgMEr8" target="_blank" class="btn-custom btn-map">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">map</span> View on Maps
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">map</span> View on Maps
                                 </a>
                                 <button class="btn-custom btn-cal" onclick="addToCalendar('Phere', '2026-11-25T23:00:00', '2026-11-26T04:00:00', 'New Mukundra, Jhalawar, Rajasthan', 'Dress Code: Casual &amp; Comfortable')">
-                                    <span class="material-icons-round" style="font-size: 1.1rem;">event</span> Add to Calendar
+                                    <span class="material-icons-round" style="font-size: 1.05rem;">event</span> Add to Calendar
                                 </button>
                             </div>
                         </div>
@@ -861,21 +892,20 @@
 
         function animateItems(group) {
             const items = group.querySelectorAll('.timeline-item');
-            let delay = 0.1;
+            let delay = 0.08;
             items.forEach(item => {
                 item.style.animation = 'none';
                 item.offsetHeight; /* trigger reflow */
-                item.style.animation = `slideUp 0.5s ease-out forwards ${delay}s`; 
-                delay += 0.1;
+                item.style.animation = `slideUp 0.4s ease-out forwards ${delay}s`; 
+                delay += 0.08;
             });
         }
 
         // Handle Filter Button Clicks
         filterBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent the document click listener from immediately resetting it
+                e.stopPropagation();
                 
-                // Remove active class from all
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
@@ -894,14 +924,12 @@
 
         // Global Click Listener for Tap-to-Reset
         document.addEventListener('click', (event) => {
-            // Check if the click happened inside the filter buttons, action buttons, overlay, or interactive elements
             const isClickInsideFilter = event.target.closest('.filter-btn');
             const isActionBtn = event.target.closest('.btn-custom');
             const isBlessingBtn = event.target.closest('.btn-blessings');
             const isMusicBtn = event.target.closest('#musicToggleBtn');
             const isWelcomeOverlay = event.target.closest('#welcomeOverlay');
             
-            // If the user tapped anywhere else on the screen (background, header, empty space)
             if (!isClickInsideFilter && !isActionBtn && !isBlessingBtn && !isMusicBtn && !isWelcomeOverlay) {
                 let didReset = false;
                 filterBtns.forEach(btn => {
@@ -911,7 +939,6 @@
                     }
                 });
                 
-                // Show all dates again
                 if (didReset) {
                     dateGroups.forEach(group => {
                         if (group.style.display !== 'block') {
@@ -941,7 +968,7 @@
                 document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
                 document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
             } else {
-                document.getElementById('countdown').innerHTML = "<h3 class='heading-serif' style='color: var(--primary-gold); font-size: 1.8rem; width: 100%; text-align: center; margin-top: 10px;'>The Celebrations Have Begun!</h3>";
+                document.getElementById('countdown').innerHTML = "<h3 class='heading-serif' style='color: var(--primary-gold); font-size: 1.5rem; width: 100%; text-align: center; margin-top: 10px;'>The Celebrations Have Begun!</h3>";
             }
         };
 
@@ -983,7 +1010,6 @@
         const musicIcon = document.getElementById('musicIcon');
         let isPlaying = false;
 
-        // Guaranteed loop configuration
         music.loop = true;
         music.addEventListener('ended', function () {
             this.currentTime = 0;
@@ -1016,7 +1042,6 @@
             }
         }
 
-        // Entry Function: Fades the splash screen and begins audio
         function enterWebsite() {
             const overlay = document.getElementById('welcomeOverlay');
             overlay.classList.add('fade-out');
@@ -1045,8 +1070,8 @@
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = -20;
-                this.size = Math.random() * 6 + 4;
-                this.speed = Math.random() * 1.5 + 0.5;
+                this.size = Math.random() * 5 + 3;
+                this.speed = Math.random() * 1.3 + 0.4;
                 this.sway = Math.random() * 2;
                 this.angle = Math.random() * Math.PI * 2;
                 this.spin = (Math.random() - 0.5) * 0.1;
@@ -1075,7 +1100,7 @@
             }
         }
 
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 25; i++) {
             petals.push(new Petal());
         }
 
